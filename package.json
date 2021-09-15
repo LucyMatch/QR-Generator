@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "node index.js"
+    "build": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,6 @@
   "homepage": "https://github.com/LucyMatch/QR-Generator#readme",
   "dependencies": {
     "bluebird": "^3.7.2",
-    "promise-retry": "^2.0.1",
     "qrcode": "^1.4.4"
   }
 }
