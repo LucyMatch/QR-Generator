@@ -18,14 +18,14 @@ function getDirList( path ){
 
 //@TODO: change this to .csvs - so a spreadsheet can be exported + added
 //for loading local json files
-function getLocalFile( path, description ){
+function getLocalFile( path ){
     return new Promise( ( resolve, reject) => {
         let raw
 		try {
 			raw = fs.readFileSync(__dirname + path)
 		} catch (err) {
 			reject({
-				msg: 'Failed to access local file : ' + description,
+				msg: 'Failed to access local file',
 				error: err,
 			})
 		}
