@@ -1,6 +1,9 @@
 const Promise = require('bluebird')
 const fs = require('fs')
 
+/* 
+    retrieves an array of all files in input folder
+*/
 function getDirList( path ){
     return new Promise( ( resolve, reject) => {
         let data
@@ -16,6 +19,10 @@ function getDirList( path ){
     })
 }
 
+/* 
+    creates a new unique directory 
+    that is named provided path name + current date / time
+*/
 function createDir( path ){
     return new Promise( ( resolve, reject) => {
         let newDir = path + '_' + createDateString()
