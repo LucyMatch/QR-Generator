@@ -12,24 +12,34 @@ const outputDir = 'output/'
 const createCodes = () => {
     return new Promise( (resolve, reject) => {
 
+        //get all files in /input
         getInputFiles()
         .then( data => {
 
             //data is list of input files
             data.forEach( inputFile => {
 
-                //now we must read the actual inputFile
                 let iPath = '/' + inputDir + inputFile
                 let oPath = '/' + outputDir + inputFile.split('.json')[0]
-                
+
+                //read input file
                 getInputs( iPath ) 
                 .then( data => {
 
-                    //loop thorugh each element in data & create a QR code to save
+                    //create named directory for codes to live in
+                    utilities.createDir( oPath )
+                    .then( dir => { 
+                        console.log( 'hello' )
+                        console.log( dir )
 
+                        //loop thorugh each element in data & create a QR code to save in dir
+
+                    })
+                    .catch( err => reject(err) )
                 })
                 .catch( err => reject(err) )
-            });
+            })
+
         })
         .catch( err => reject(err) )
 
@@ -61,8 +71,12 @@ const getInputs = ( path ) => {
 
 //start build flow
 createCodes()
-.then( data => console.log( 'SUCCESS' ))
-.catch( err => console.log( err.error ))
+.then( data => console.log( '---- S U C C E S S ----' ))
+.catch( err => {
+    console.log( '---- A N  E R R O R  H A S  O C C U R E D ----' )
+    if(err.msg)console.log( err.msg )
+    console.log( err.error )
+})
 
 
 
