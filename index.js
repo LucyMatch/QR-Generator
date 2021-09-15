@@ -34,19 +34,23 @@ const createCodes = () => {
                         //@TODO: this may require more formatting when we change to .csv
                         data.forEach( d => {
 
+                            let path = __dirname + dir + '/' + d.id + '.svg'
+                            let url = d.url
+
                             //create code
-
+                            createCode( path, url )
+                            .then( res => console.log( res + ' : ' + d.id ) )
+                            .catch( err => reject(err) )
                         } )
-
+                        //complete promise if reaches here
+                        resolve()
                     })
                     .catch( err => reject(err) )
                 })
                 .catch( err => reject(err) )
             })
-
         })
         .catch( err => reject(err) )
-
     })
 }
 
@@ -76,9 +80,19 @@ const getInputs = ( path ) => {
 /* 
     retrieve list of data from input file
 */
-const createCode = ( dir ) => {
+const createCode = ( path, url ) => {
     return new Promise( (resolve, reject) => {
+        QRCode.toFile( path, url, {
 
+            color:{
+                dark: '#111',   //dark grey
+                light: '#0000'  //transparent
+            }
+
+        }, function (err) {
+            if(err) reject(err)
+            resolve("Successfully Created")
+        })
     })
 }
 
