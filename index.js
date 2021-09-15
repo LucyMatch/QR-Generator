@@ -34,7 +34,7 @@ const createCodes = () => {
                         //@TODO: this may require more formatting when we change to .csv
                         data.forEach( d => {
 
-                            let path = __dirname + dir + '/' + d.id + '.svg'
+                            let path = __dirname + dir + '/' + d.id + '.png'
                             let url = d.url
 
                             //create code
