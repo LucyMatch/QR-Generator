@@ -14,10 +14,10 @@ const createCodes = () => {
 
         //get all files in /input
         getInputFiles()
-        .then( data => {
+        .then( inputs => {
 
             //data is list of input files
-            data.forEach( inputFile => {
+            inputs.forEach( inputFile => {
 
                 let iPath = '/' + inputDir + inputFile
                 let oPath = '/' + outputDir + inputFile.split('.json')[0]
@@ -29,10 +29,14 @@ const createCodes = () => {
                     //create named directory for codes to live in
                     utilities.createDir( oPath )
                     .then( dir => { 
-                        console.log( 'hello' )
-                        console.log( dir )
 
                         //loop thorugh each element in data & create a QR code to save in dir
+                        //@TODO: this may require more formatting when we change to .csv
+                        data.forEach( d => {
+
+                            //create code
+
+                        } )
 
                     })
                     .catch( err => reject(err) )
@@ -69,7 +73,20 @@ const getInputs = ( path ) => {
     })
 }
 
-//start build flow
+/* 
+    retrieve list of data from input file
+*/
+const createCode = ( dir ) => {
+    return new Promise( (resolve, reject) => {
+
+    })
+}
+
+/* 
+    ---------------------------------------------
+    Run the thing! 
+    ---------------------------------------------
+*/
 createCodes()
 .then( data => console.log( '---- S U C C E S S ----' ))
 .catch( err => {
