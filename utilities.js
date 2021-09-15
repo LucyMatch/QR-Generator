@@ -1,11 +1,23 @@
 const Promise = require('bluebird')
 const fs = require('fs')
 
-//@TODO: what would be best file format for our inputs?
-//      maybe csv? so can be exported from spreadsheet?
+function getDirList( path ){
+    return new Promise( ( resolve, reject) => {
+        let data
+        try {
+            data = fs.readdirSync( path )
+        }catch (err){
+            reject({
+				msg: 'Failed to access local directory',
+				error: err,
+			})
+        }
+        resolve( data )
+    })
+}
 
+//@TODO: change this to .csvs - so a spreadsheet can be exported + added
 //for loading local json files
-
 function getLocalFile( path, description ){
     return new Promise( ( resolve, reject) => {
         let raw
@@ -22,4 +34,4 @@ function getLocalFile( path, description ){
     })
 }
 
-module.exports = { getLocalFile }
+module.exports = { getLocalFile, getDirList }
