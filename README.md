@@ -7,11 +7,20 @@ This script generates QR Code .pngs based off provided data in .csv format
 
 ## Usage
 
-1. Add data ```.csv``` file to ```/input``` folder
-2. [ TBD how to update design settings ]
-3. [ TBD on how to install modules -  can I create an easy .exe? ]
-4. [ TBD how to run script - can I create an easy .exe? ]
+Ensure you have node.js installed on your machine. [Install here](https://nodejs.org/en/download/) 
+
+
+
+1. Add data ```.csv``` file to ```/input``` folder. refer to input data section for details
+2. Click on the ``app_install`` file relevant to your operating system
+3. Click on the ```app_run``` file relevant to your operating system
 5. Retrieve your QR Codes from ```/output/[csv-file-name-date]/```
+
+
+
+Optional:
+
+* Update any render settings in ```/settings/render-options.json```
 
 
 
