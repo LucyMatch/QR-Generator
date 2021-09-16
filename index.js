@@ -20,7 +20,7 @@ const createCodes = () => {
             inputs.forEach( inputFile => {
 
                 let iPath = '/' + inputDir + inputFile
-                let oPath = '/' + outputDir + inputFile.split('.json')[0]
+                let oPath = '/' + outputDir + inputFile.split('.csv')[0]
 
                 //read input file
                 getInputs( iPath ) 
@@ -31,7 +31,6 @@ const createCodes = () => {
                     .then( dir => { 
 
                         //loop thorugh each element in data & create a QR code to save in dir
-                        //@TODO: this may require more formatting when we change to .csv
                         data.forEach( d => {
 
                             let path = __dirname + dir + '/' + d.id + '.png'
@@ -68,12 +67,18 @@ const getInputFiles = () => {
 
 /* 
     retrieve list of data from input file
+    checks if CSV or JSON
 */
 const getInputs = ( path ) => {
     return new Promise( (resolve, reject) => {
-        utilities.getLocalFile( path )
-        .then( data => resolve(data) )
-        .catch(err => reject(err))
+
+        if(path.includes('.csv')){
+
+            utilities.getLocalCSV( path )
+            .then( data => resolve(data) )
+            .catch(err => reject(err))
+
+        }
     })
 }
 
