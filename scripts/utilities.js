@@ -28,11 +28,8 @@ function createDir( path ){
     return new Promise( ( resolve, reject) => {
         let newDir = path + '_' + createDateString()
         try {
-            if( fs.existsSync( newDir ) ){
-                reject({ error: 'directory already exists: ' + newDir,})
-            }else{
+            if( !fs.existsSync( newDir ) )
                 fs.mkdirSync( newDir )
-            }
         } catch( err ){ 
             reject({
 				msg: 'Failed create local output directory : ' + newDir,

@@ -2,17 +2,24 @@ const QRCode = require('qrcode')
 const Promise = require('bluebird')
 const utilities = require('./utilities.js')
 const path = require('path')
+const fs = require('fs')
 
 /* path variables */
 const inputDir = path.join( __dirname, '..', 'input/' )
 const outputDir = path.join( __dirname, '..', 'output/' )
 const settingsPath = path.join( __dirname, '..', 'settings', 'render-options.json' )
 
+/* create output directory if doesnt exist */
+if( !fs.existsSync( outputDir ) )
+    fs.mkdirSync( outputDir )
+
 /* 
     main function to call - to start chain of functions
 */
 const createCodes = () => {
     return new Promise( (resolve, reject) => {
+
+
 
         //get all files in /input
         getInputFiles()
