@@ -1,10 +1,11 @@
 const QRCode = require('qrcode')
 const Promise = require('bluebird')
 const utilities = require('./utilities.js')
+const path = require('path')
 
 /* path variables */
-const inputDir = 'input/'
-const outputDir = 'output/'
+const inputDir = path.join( __dirname, '..', 'input/' )
+const outputDir = path.join( __dirname, '..', 'output/' )
 
 /* 
     main function to call - to start chain of functions
@@ -19,8 +20,8 @@ const createCodes = () => {
             //data is list of input files
             inputs.forEach( inputFile => {
 
-                let iPath = '/' + inputDir + inputFile
-                let oPath = '/' + outputDir + inputFile.split('.csv')[0]
+                let iPath = path.join( inputDir, inputFile )
+                let oPath = path.join( outputDir, inputFile.split('.csv')[0] )
 
                 //read input file
                 getInputs( iPath ) 
@@ -33,11 +34,12 @@ const createCodes = () => {
                         //loop thorugh each element in data & create a QR code to save in dir
                         data.forEach( d => {
 
-                            let path = __dirname + dir + '/' + d.id + '.png'
+                            // let p = __dirname + dir + '/' + d.id + '.png'
+                            let p = path.join( dir, d.id + '.png' )
                             let url = d.url
 
                             //create code
-                            createCode( path, url )
+                            createCode( p, url )
                             .then( res => console.log( res + ' : ' + d.id ) )
                             .catch( err => reject(err) )
                         } )

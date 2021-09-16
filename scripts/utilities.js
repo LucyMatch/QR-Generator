@@ -31,7 +31,7 @@ function createDir( path ){
             if( fs.existsSync( newDir ) ){
                 reject({ error: 'directory already exists: ' + newDir,})
             }else{
-                fs.mkdirSync(__dirname + newDir)
+                fs.mkdirSync( newDir )
             }
         } catch( err ){ 
             reject({
@@ -51,7 +51,7 @@ function getLocalFile( path ){
     return new Promise( ( resolve, reject) => {
         let raw
 		try {
-			raw = fs.readFileSync(__dirname + path)
+			raw = fs.readFileSync( path )
 		} catch (err) {
 			reject({
 				msg: 'Failed to access local file',
@@ -71,7 +71,7 @@ function getLocalCSV( path ){
     return new Promise( ( resolve, reject ) => {
         let raw
 		try {
-			raw = fs.readFileSync(__dirname + path)
+			raw = fs.readFileSync( path )
 		} catch (err) {
 			reject({msg: 'Failed to access local file', error: err})
 		}
