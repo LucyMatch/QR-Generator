@@ -39,13 +39,13 @@ The script will generate two new directories every time the script is run. These
 
 Your QR Codes are exported into these directories
 
+## Render Settings
 
+[Info on settings here](https://www.npmjs.com/package/qrcode#renderers-options)
 
-## Directory 
+Design Settings can be configured via ```/settings/render-options.json```
 
-
-
-
+They directly match the settings outlined in the above link
 
 ## Dependencies
 
