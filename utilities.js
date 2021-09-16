@@ -1,5 +1,6 @@
 const Promise = require('bluebird')
 const fs = require('fs')
+const neatCsv = require('neat-csv')
 
 /* 
     retrieves an array of all files in input folder
@@ -42,8 +43,10 @@ function createDir( path ){
     })
 }
 
-//@TODO: change this to .csvs - so a spreadsheet can be exported + added
-//for loading local json files
+/* 
+    retrieves local JSON file from provided path
+    parses the JSON data into obj before returning
+*/
 function getLocalFile( path ){
     return new Promise( ( resolve, reject) => {
         let raw
@@ -61,6 +64,25 @@ function getLocalFile( path ){
 }
 
 /* 
+    retrieves local CSV file from provided path
+    parses the CSV data into obj before returning
+*/
+function getLocalCSV( path ){
+    return new Promise( ( resolve, reject ) => {
+        let raw
+		try {
+			raw = fs.readFileSync(__dirname + path)
+		} catch (err) {
+			reject({msg: 'Failed to access local file', error: err})
+		}
+        //if success use csvparser
+        neatCsv( raw )
+        .then( data => resolve(data) )
+        .catch( err => reject({ msg: 'Failed to parse CSV', error : err}))
+    })
+}
+
+/* 
     outputs a formatted date string 
     to be used in file name + directory unique naming
 */
@@ -69,4 +91,4 @@ function createDateString( ){
     return d.getMonth() + '_' + d.getDate() + '_' + d.getFullYear() + '_' + d.getHours()  + '_' + d.getMinutes()  + '_' + d.getSeconds()
 }
 
-module.exports = { getLocalFile, getDirList, createDir, createDateString }
+module.exports = { getLocalFile, getLocalCSV, getDirList, createDir, createDateString }
