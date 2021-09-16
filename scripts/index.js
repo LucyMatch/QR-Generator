@@ -6,6 +6,7 @@ const path = require('path')
 /* path variables */
 const inputDir = path.join( __dirname, '..', 'input/' )
 const outputDir = path.join( __dirname, '..', 'output/' )
+const settingsPath = path.join( __dirname, '..', 'settings', 'render-options.json' )
 
 /* 
     main function to call - to start chain of functions
@@ -89,20 +90,26 @@ const getInputs = ( path ) => {
 */
 const createCode = ( path, url ) => {
     return new Promise( (resolve, reject) => {
-        QRCode.toFile( path, url, {
 
-            color:{
-                dark: '#111',   //dark grey
-                light: '#0000'  //transparent
-            },
-            width: 1000,
-            margin: 5,
-            scale : 5
+        //retrieve settings file
+        utilities.getLocalFile( settingsPath )
+        .then( data => {
+            QRCode.toFile( path, url, {
 
-        }, function (err) {
-            if(err) reject(err)
-            resolve("Successfully Created")
+                color:{
+                    dark: data.color.dark,
+                    light: data.color.light
+                },
+                width: data.width,
+                margin: data.margin,
+                scale : data.scale
+    
+            }, function (err) {
+                if(err) reject(err)
+                resolve("Successfully Created")
+            })
         })
+        .catch( err => reject(err) )
     })
 }
 
