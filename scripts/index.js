@@ -94,7 +94,10 @@ const createCode = ( path, url ) => {
             color:{
                 dark: '#111',   //dark grey
                 light: '#0000'  //transparent
-            }
+            },
+            width: 1000,
+            margin: 5,
+            scale : 5
 
         }, function (err) {
             if(err) reject(err)
