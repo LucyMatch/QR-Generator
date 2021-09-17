@@ -46,7 +46,7 @@ const createCodes = () => {
                             let url = d.url
 
                             //get the design options
-                            getOptions( p, url )
+                            getOptions( url )
                             .then( opts => {
                                 createCode( p, opts )
                                 .then( res => console.log( res + ' : ' + d.id ) )
