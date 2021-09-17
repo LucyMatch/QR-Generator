@@ -2,11 +2,11 @@
     "width": 1000,
     "height": 1000,
     "data": "",
-    "margin": 0,
+    "margin": 4,
     "imageOptions": {
         "hideBackgroundDots": true,
         "imageSize": 0.4,
-        "margin": 0
+        "margin": 10
     },
     "image": "Asset 1.png",
     "dotsOptions": {
