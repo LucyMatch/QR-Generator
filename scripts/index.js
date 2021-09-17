@@ -1,4 +1,5 @@
-const QRCode = require('qrcode')
+const { QRCodeStyling } = require("@ckho/qr-code-styling/lib/qr-code-styling.common.js");
+const nodeCanvas = require("canvas");
 const Promise = require('bluebird')
 const utilities = require('./utilities.js')
 const path = require('path')
@@ -7,7 +8,7 @@ const fs = require('fs')
 /* path variables */
 const inputDir = path.join( __dirname, '..', 'input/' )
 const outputDir = path.join( __dirname, '..', 'output/' )
-const settingsPath = path.join( __dirname, '..', 'settings', 'render-options.json' )
+const designOptsDir = path.join( __dirname, '..', 'design/' )
 
 /* create output directory if doesnt exist */
 if( !fs.existsSync( outputDir ) )
@@ -18,8 +19,6 @@ if( !fs.existsSync( outputDir ) )
 */
 const createCodes = () => {
     return new Promise( (resolve, reject) => {
-
-
 
         //get all files in /input
         getInputFiles()
@@ -46,10 +45,15 @@ const createCodes = () => {
                             let p = path.join( dir, d.id + '.png' )
                             let url = d.url
 
-                            //create code
-                            createCode( p, url )
-                            .then( res => console.log( res + ' : ' + d.id ) )
+                            //get the design options
+                            getOptions( p, url )
+                            .then( opts => {
+                                createCode( p, opts )
+                                .then( res => console.log( res + ' : ' + d.id ) )
+                                .catch( err => reject(err) )
+                            })
                             .catch( err => reject(err) )
+
                         } )
                         //complete promise if reaches here
                         resolve()
@@ -93,32 +97,51 @@ const getInputs = ( path ) => {
 }
 
 /* 
-    retrieve list of data from input file
+    get the design options
+
+    @TODO: ideally we would want to have a system where you can have
+        default options file
+        but also check for individual options files
+        individual option files would need to match a .csv input file name
+
 */
-const createCode = ( path, url ) => {
+const getOptions = ( url ) => {
     return new Promise( (resolve, reject) => {
-
-        //retrieve settings file
-        utilities.getLocalFile( settingsPath )
-        .then( data => {
-            QRCode.toFile( path, url, {
-
-                color:{
-                    dark: data.color.dark,
-                    light: data.color.light
-                },
-                width: data.width,
-                margin: data.margin,
-                scale : data.scale
-    
-            }, function (err) {
-                if(err) reject(err)
-                resolve("Successfully Created")
-            })
+        utilities.getLocalFile( designOptsDir + 'render-options.json' )
+        .then( options => {
+            options.data = url;
+            options.image = designOptsDir + options.image
+            resolve(options)
         })
-        .catch( err => reject(err) )
+        .catch( err => reject({msg: 'Failed read settings file', error: err}))
     })
 }
+
+
+/* 
+    create the codes!
+
+*/
+
+const createCode = ( path, opts ) => {
+    return new Promise( (resolve, reject) => {
+
+        const qr = new QRCodeStyling({ nodeCanvas, ...opts})
+
+        qr.getRawData("png")
+        .then( buffer => {
+            try {
+                fs.writeFileSync( path, buffer );
+            } catch (err) {
+                reject({msg: 'Failed to write local file', error: err})
+            }
+            resolve("Successfully Created")
+        })
+        .catch( err => reject({msg: 'Failed to write local file', error: err}))
+
+    })
+}
+
 
 /* 
     ---------------------------------------------
