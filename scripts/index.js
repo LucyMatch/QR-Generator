@@ -46,7 +46,9 @@ const createCodes = () => {
                             let url = d.url
 
                             //get the design options
-                            getOptions( url )
+                            //we send the inputname as "batch name" - 
+                            //to see if we have unique settings for this batch
+                            getOptions( inputFile.split('.csv')[0], url )
                             .then( opts => {
                                 createCode( p, opts )
                                 .then( res => console.log( res + ' : ' + d.id ) )
@@ -99,18 +101,21 @@ const getInputs = ( path ) => {
 /* 
     get the design options
 
-    @TODO: ideally we would want to have a system where you can have
-        default options file
-        but also check for individual options files
-        individual option files would need to match a .csv input file name
-
 */
-const getOptions = ( url ) => {
+const getOptions = ( batch_name, url ) => {
     return new Promise( (resolve, reject) => {
-        utilities.getLocalFile( designOptsDir + 'render-options.json' )
+
+        //first determine if there is a specific design file
+        //or if we are just using default options - i.e. render-options.json
+        let p = designOptsDir + batch_name + '.json'
+        if( !fs.existsSync( p ) ){
+            p = designOptsDir + 'render-options.json'
+        }
+
+        utilities.getLocalFile( p )
         .then( options => {
             options.data = url;
-            options.image = designOptsDir + options.image
+            if(options.image)options.image = designOptsDir + options.image
             resolve(options)
         })
         .catch( err => reject({msg: 'Failed read settings file', error: err}))
