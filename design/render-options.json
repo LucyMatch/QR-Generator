@@ -1,0 +1,63 @@
+{
+    "width": 1000,
+    "height": 1000,
+    "data": "",
+    "margin": 0,
+    "imageOptions": {
+        "hideBackgroundDots": true,
+        "imageSize": 0.4,
+        "margin": 0
+    },
+    "image": "Asset 1.png",
+    "dotsOptions": {
+        "type": "square",
+        "color": "#000000",
+        "gradient": {
+            "type": "linear",
+            "rotation": 4.71238898038469,
+            "colorStops": [
+                {
+                    "offset": 0,
+                    "color": "#EB7638"
+                },
+                {
+                    "offset": 0.33,
+                    "color": "#E36982"
+                },
+                {
+                    "offset": 0.66,
+                    "color": "#47ACDB"
+                },
+                {
+                    "offset": 1,
+                    "color": "#2EB88B"
+                }
+            ]
+        }
+    },
+    "backgroundOptions": {
+        "color": "#00000000"
+    },
+    "dotsOptionsHelper": {
+        "colorType": {
+            "single": true,
+            "gradient": false
+        },
+        "gradient": {
+            "linear": true,
+            "radial": false,
+            "color1": "#6a1a4c",
+            "color2": "#6a1a4c",
+            "rotation": "0"
+        }
+    },
+    "cornersSquareOptions": {
+        "type": "square",
+        "color": "#000000"
+    },
+    "cornersDotOptions": {
+        "type": "square",
+        "color": "#000000",
+        "gradient": null
+    }
+}
