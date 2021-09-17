@@ -41,7 +41,6 @@ const createCodes = () => {
                         //loop thorugh each element in data & create a QR code to save in dir
                         data.forEach( d => {
 
-                            // let p = __dirname + dir + '/' + d.id + '.png'
                             let p = path.join( dir, d.id + '.png' )
                             let url = d.url
 
@@ -87,13 +86,10 @@ const getInputFiles = () => {
 */
 const getInputs = ( path ) => {
     return new Promise( (resolve, reject) => {
-
         if(path.includes('.csv')){
-
             utilities.getLocalCSV( path )
             .then( data => resolve(data) )
             .catch(err => reject(err))
-
         }
     })
 }
