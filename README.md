@@ -3,7 +3,9 @@
 
 This script generates QR Code .pngs based off provided data in .csv format
 
+This version generates highly styled QR codes. Based off [qr-code-styling](https://qr-code-styling.com/) . All design features shown there can be implemented here. For complex designs I would recommend using that website to generate design settings, scrolling to the bottom of the page allows you to export to JSON. 
 
+For basic black and white QR codes using ```qrcode``` module, please see ```plain-codes``` branch of this repo.
 
 ## Usage
 
@@ -39,15 +41,15 @@ For spreadsheet template in .csv format see ```input/template/example.csv```
 
 ## Output Data Format
 
-Each time you run the script, a folder in ```/output```will be generated per ```.csv``` file provided in ```/input``` . Each of these output directories will be named based off their respective input file + current date time. 
+Each time you run the script, a folder in ```/output```will be generated per ```.csv``` file provided in ```/input``` . Each of these output directories will be named based off their respective input .csv  file + current date time. 
 
 example;
 
-you have two files in ```/input``` ;  ```social-links.csv``` and ```personal.csv``` 
+* you have two files in ```/input``` ;  ```social-links.csv``` and ```personal.csv``` 
 
-The script will generate two new directories every time the script is run. These directories will be ```/output/social-links_DATE_TIME``` and ```/output/personal_DATE_TIME```
-
-Your QR Codes are exported into these directories
+* The script will generate two new directories every time the script is run. 
+* These directories will be ```/output/social-links_DATE_TIME``` and ```/output/personal_DATE_TIME```
+* Your QR Codes are exported into these directories
 
 ## Render Settings & design 
 
