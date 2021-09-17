@@ -20,8 +20,7 @@ Ensure you have node.js installed on your machine. [Install here](https://nodejs
 
 Optional:
 
-* Update any render settings in ```/settings/render-options.json```
-
+* Update any render settings / designs in ```/design/render-options.json```
 
 
 ## Input Data Format
@@ -48,13 +47,15 @@ The script will generate two new directories every time the script is run. These
 
 Your QR Codes are exported into these directories
 
-## Render Settings
+## Render Settings & design 
 
-[Info on settings here](https://www.npmjs.com/package/qrcode#renderers-options)
+[you can design here and export out settings as JSON - script will accept these params](https://qr-code-styling.com/)
 
-Design Settings can be configured via ```/settings/render-options.json```
+Default Design Settings can be configured via ```/design/render-options.json```
 
-They directly match the settings outlined in the above link
+Any logos or assets to embed in the QRCode should also be placed in here, the filename of the image should then be added to the options.json file.
+
+
 
 ## Dependencies
 
@@ -64,5 +65,6 @@ Modules;
 
 * ```bluebird```
 * ```neat-csv```
-* ```qrcode```
+* https://www.npmjs.com/package/@ckho/qr-code-styling](qr-code-styling)
+* ```canvas```
 
