@@ -19,7 +19,8 @@
   "homepage": "https://github.com/LucyMatch/QR-Generator#readme",
   "dependencies": {
     "bluebird": "^3.7.2",
+    "canvas": "^2.8.0",
     "neat-csv": "^6.0.1",
-    "qrcode": "^1.4.4"
+    "qr-code-styling": "^1.6.0-rc.1"
   }
 }
